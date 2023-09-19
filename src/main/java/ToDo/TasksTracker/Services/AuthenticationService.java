@@ -3,7 +3,7 @@ package ToDo.TasksTracker.Services;
 import ToDo.TasksTracker.Email.EmailSender;
 import ToDo.TasksTracker.Email.EmailValidator;
 import ToDo.TasksTracker.Model.Users;
-import ToDo.TasksTracker.Payload.Request.AuthenticationRequest;
+import ToDo.TasksTracker.Payload.Request.LoginRequest;
 import ToDo.TasksTracker.Payload.Request.RegisterRequest;
 import ToDo.TasksTracker.Payload.Response.AuthenticationResponse;
 import ToDo.TasksTracker.Repository.TokenRepository;
@@ -65,26 +65,26 @@ public class AuthenticationService {
         return "Verify your Email";
     }
 
-//    public AuthenticationResponse authenticate(AuthenticationRequest request) {
-//        authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        request.getEmail(),
-//                        request.getPassword()
-//                )
-//        );
-//        var user = userRepository.findByEmail(request.getEmail())
-//                .orElseThrow(()-> new UsernameNotFoundException("User Doesn't Exist"));
-//        if (user.isVerified()==false){
-//            throw new RuntimeException("Please verify your email to log in");
-//        }
-//        var jwtToken = jwtService.generateToken(user);
-//        revokeAllUserTokens(user);
-//        saveUserToken(user, jwtToken);
-//        return AuthenticationResponse.builder()
-//                .token(jwtToken)
-//                .message("Logged in Successfully")
-//                .build();
-//    }
+    public AuthenticationResponse login(LoginRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
+        var user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(()-> new UsernameNotFoundException("User Doesn't Exist"));
+        if (user.isVerified()==false){
+            throw new RuntimeException("Please verify your email to log in");
+        }
+        var jwtToken = jwtService.generateToken(user);
+        revokeAllUserTokens(user);
+        saveUserToken(user, jwtToken);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .message("Logged in Successfully")
+                .build();
+    }
     private void saveUserToken(Users user, String jwtToken) {
         var token = Token.builder()
                 .user(user)

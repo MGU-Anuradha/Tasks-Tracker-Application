@@ -1,7 +1,7 @@
 package ToDo.TasksTracker.Controller;
 
 
-import ToDo.TasksTracker.Payload.Request.AuthenticationRequest;
+import ToDo.TasksTracker.Payload.Request.LoginRequest;
 import ToDo.TasksTracker.Payload.Request.RegisterRequest;
 import ToDo.TasksTracker.Payload.Response.AuthenticationResponse;
 import ToDo.TasksTracker.Services.AuthenticationService;
@@ -26,10 +26,10 @@ public class AuthenticationController {
 //    public ResponseEntity<String> registerAdmin(@RequestBody RegisterRequest request) {
 //        return ResponseEntity.ok(authenticationService.registerAdmin(request));
 //    }
-//    @PostMapping("/authenticate")
-//    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
-//        return ResponseEntity.ok(authenticationService.authenticate(request));
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authenticationService.login(request));
+    }
 
     @GetMapping(path = "/confirm")
     public String confirm(@RequestParam("token") String token) {
