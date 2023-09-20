@@ -13,9 +13,6 @@ public class Tasks {
         private String title;
         @Column(nullable = false)
         private String description;
-
-//        @Column(nullable = false)
-//        private Date dueDate;
         @Column(nullable = false)
         private String category;
         @Column(nullable = false)
@@ -30,7 +27,6 @@ public class Tasks {
     public Tasks(String title, String description, Date dueDate, String category, Boolean completed) {
         this.title = title;
         this.description = description;
-//        this.dueDate = dueDate;
         this.category = category;
         this.completed = completed;
     }
@@ -64,15 +60,6 @@ public class Tasks {
     public void setDescription(String description) {
         this.description = description;
     }
-
-//    public Date getDueDate() {
-//        return dueDate;
-//    }
-//
-//    public void setDueDate(Date dueDate) {
-//        this.dueDate = dueDate;
-//    }
-
     public String getCategory() {
         return category;
     }

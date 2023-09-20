@@ -1,11 +1,9 @@
 package ToDo.TasksTracker.Payload.Request;
 
-import java.time.LocalDate;
 
 public class TaskRequest {
     private String title;
     private String description;
-//    private LocalDate dueDate;
     private String category;
     private Boolean completed;
 
@@ -22,7 +20,6 @@ public class TaskRequest {
     public void setDescription(String description) {
         this.description = description;
     }
-
     public String getCategory() {
         return category;
     }

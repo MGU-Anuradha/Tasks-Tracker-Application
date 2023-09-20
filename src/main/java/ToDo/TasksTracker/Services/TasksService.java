@@ -22,7 +22,6 @@ public class TasksService {
         task.setDescription(request.getDescription());
         task.setCategory(request.getCategory());
         task.setCompleted(request.getCompleted());
-        //task.setDueDate(request.getDueDate());
 
         try {
             taskRepository.save(task);
@@ -68,6 +67,29 @@ public class TasksService {
     }
 
     // Other service methods...
+    public boolean deleteTaskByIdAndUserEmail(Long taskId, String userEmail) {
+        try {
+            // Retrieve the task from the database by its ID and user's email
+            Optional<Tasks> optionalTask = taskRepository.findByIdAndEmail(taskId, userEmail);
+
+            if (optionalTask.isPresent()) {
+                Tasks task = optionalTask.get();
+
+                // Delete the task from the database
+                taskRepository.delete(task);
+
+                return true; // Task deleted successfully.
+            } else {
+                // Task with the given ID and user's email not found
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Failed to delete the task.
+        }
+    }
+
+
 
 }
 

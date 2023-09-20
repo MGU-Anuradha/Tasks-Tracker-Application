@@ -60,4 +60,21 @@ public class TasksController {
             return ResponseEntity.badRequest().body("Failed to update task.");
         }
     }
+
+    @DeleteMapping("/delete/{taskId}")
+    public ResponseEntity<String> deleteTask(@PathVariable Long taskId, Authentication authentication) {
+
+        String userEmail = authentication.getName(); // Get the currently logged-in user's email
+
+        boolean taskDeleted = taskService.deleteTaskByIdAndUserEmail(taskId, userEmail); // Call the service method to delete the task with the provided taskId and userEmail
+
+        // Check the result and return an appropriate response
+        if (taskDeleted) {
+            return ResponseEntity.ok("Task deleted successfully.");
+        } else {
+            return ResponseEntity.badRequest().body("Failed to delete the task.");
+        }
+    }
+
+
 }
