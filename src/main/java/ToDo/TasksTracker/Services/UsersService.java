@@ -26,8 +26,16 @@ public class UsersService implements UserDetailsService {
     public Optional<Users> findByUserId(int id) {
         return userRepository.findById(id);
     }
-//    public void deleteUserById(int id) {
-//        userRepository.deleteById(id);
-//    }
+    // Add a method to delete a user by email
+
+    public void deleteUserByEmail(String email) {
+        Optional<Users> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            userRepository.delete(user.get());
+        } else {
+            throw new IllegalArgumentException("User not found");
+        }
+    }
+
 
 }

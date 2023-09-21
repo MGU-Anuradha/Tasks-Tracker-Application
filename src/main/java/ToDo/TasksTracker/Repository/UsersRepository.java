@@ -14,6 +14,7 @@ import java.util.Optional;
 public interface UsersRepository extends JpaRepository<Users, Integer> {
     Optional<Users> findByEmail(String email);
     boolean existsByEmail(String email); //checks if a user with the given email exists in the database.
+    void deleteByEmail(String email);  // Custom method to delete a user by email
     @Transactional
     @Modifying
     @Query("UPDATE Users a " + "SET a.verified = TRUE WHERE a.email = ?1")
