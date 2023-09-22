@@ -32,4 +32,6 @@ Run the application using java -jar.
 - Access the Application: 
 Open a web browser and access the application at the provided URL (e.g., http://localhost:8080).
 
+I'll implement the frontend for this application. Keep Counting.. :relaxed:
+
 
